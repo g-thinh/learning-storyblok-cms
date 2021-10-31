@@ -8,5 +8,6 @@ module.exports = {
     databaseURL: process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL,
     privateKey: process.env.NEXT_PUBLIC_FIREBASE_PRIVATE_KEY,
     clientEmail: process.env.NEXT_PUBLIC_FIREBASE_CLIENT_EMAIL,
+    storyblokAcessToken: process.env.NEXT_PUBLIC_STORYBLOK_ACCESS_TOKEN,
   },
 };

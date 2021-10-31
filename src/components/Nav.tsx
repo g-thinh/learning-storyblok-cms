@@ -30,7 +30,7 @@ export default function Nav() {
             },
           }}
         >
-          Simple Firebase Auth.
+          Simple Hub.
         </Link>
         <Grid
           sx={{
