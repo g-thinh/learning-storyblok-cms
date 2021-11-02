@@ -2,14 +2,13 @@ import { Container, Heading, useColorMode } from "@chakra-ui/react";
 import DynamicComponent from "components/DynamicComponent";
 import { GetStaticPropsContext, InferGetStaticPropsType } from "next";
 import Storyblok, { useStoryblok } from "services/storyblok";
-import { useRouter } from "next/router";
 
 export async function getStaticProps(context: GetStaticPropsContext) {
   // the slug of the story
-  let slug = "home";
+  const slug = "home";
+
   // the storyblok params
-  context.preview = true;
-  let params = {
+  const params = {
     version: "draft", // or 'published'
   };
 
@@ -21,7 +20,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
   }
 
   // loads the story from the Storyblok API
-  let { data } = await Storyblok.get(`cdn/stories/${slug}`, params);
+  const { data } = await Storyblok.get(`cdn/stories/${slug}`, params);
 
   // return the story from Storyblok and whether preview mode is active
   return {
@@ -36,12 +35,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
 export default function HomePage(
   props: InferGetStaticPropsType<typeof getStaticProps>
 ) {
-  const router = useRouter();
-  const { preview } = router.query;
-  const enableBridge = preview; // load the storyblok bridge everywhere
-  // const enableBridge = preview; // enable bridge only in prevew mode
-
-  const story = useStoryblok(props.story, !!enableBridge);
+  const story = useStoryblok(props.story, props.preview);
 
   const { colorMode } = useColorMode();
   return (
