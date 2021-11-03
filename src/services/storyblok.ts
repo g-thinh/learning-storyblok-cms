@@ -1,5 +1,5 @@
+import { useEffect, useState } from "react";
 import StoryblokClient, { StoryData } from "storyblok-js-client";
-import { useEffect, useState, useCallback } from "react";
 
 declare global {
   interface Window {
@@ -15,8 +15,11 @@ const Storyblok = new StoryblokClient({
   },
 });
 
-export function useStoryblok(originalStory: StoryData, preview: boolean) {
-  const [story, setStory] = useState<StoryData>(originalStory);
+export function useStoryblok<T extends StoryData>(
+  originalStory: T,
+  preview: boolean
+): typeof originalStory {
+  const [story, setStory] = useState<typeof originalStory>(originalStory);
 
   // adds the events for updating the visual editor
   // see https://www.storyblok.com/docs/guide/essentials/visual-editor#initializing-the-storyblok-js-bridge
