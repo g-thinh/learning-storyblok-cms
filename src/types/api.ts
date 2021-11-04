@@ -13,3 +13,22 @@ export type UserForm = {
 export type StoryResult = StoryData<
   StoryblokComponent<string> & { title?: string; body?: Richtext }
 >;
+
+export type StoryblokLinks = {
+  links: {
+    [link_id: string]: StoryblokLink;
+  };
+};
+
+export type StoryblokLink = {
+  id: number;
+  slug: string;
+  is_folder: boolean;
+  parent_id: number;
+  published: boolean;
+  path: string;
+  position: number;
+  uuid: string;
+  is_startpage: boolean;
+  real_path: string;
+};
