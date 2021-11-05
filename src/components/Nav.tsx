@@ -3,16 +3,16 @@ import {
   Container,
   Flex,
   Grid,
-  HStack,
   IconButton,
-  useColorMode,
   Select,
+  useColorMode,
 } from "@chakra-ui/react";
 import Link from "components/Link";
 import { useAuth } from "contexts/AuthContext";
+import useTranslation from "hooks/useTranslation";
+import { useRouter } from "next/router";
 import { FiMoon, FiSun } from "react-icons/fi";
 import { signUserOut } from "utils/firebaseHelpers";
-import { useRouter } from "next/router";
 
 const languages = {
   en: "English",
@@ -23,11 +23,11 @@ export default function Nav() {
   const { colorMode, toggleColorMode } = useColorMode();
   const { user } = useAuth();
   const router = useRouter();
+  const { t } = useTranslation();
   const { pathname, asPath, query, locale, locales } = router;
 
   const handleLocaleChange = (e: React.FormEvent<HTMLSelectElement>) => {
     const newLocale = e.currentTarget.value;
-    console.log("switching to", newLocale);
     router.push({ pathname, query }, asPath, { locale: newLocale });
   };
 
@@ -54,42 +54,36 @@ export default function Nav() {
             alignItems: "center",
           }}
         >
-          <HStack spacing="16px">
-            <Select defaultValue={locale} onChange={handleLocaleChange}>
-              {locales.map((language, index) => {
-                return (
-                  <option key={index} value={language}>
-                    {languages[language]}
-                  </option>
-                );
-              })}
-            </Select>
-            <IconButton
-              aria-label="toggle dark/light mode"
-              icon={
-                colorMode === "light" ? (
-                  <FiSun size={18} />
-                ) : (
-                  <FiMoon size={18} />
-                )
-              }
-              onClick={toggleColorMode}
-            />
-            {user ? (
-              <>
-                <Link as={Button} href="/authenticated">
-                  Profile
-                </Link>
-                <Button colorScheme="teal" onClick={signUserOut}>
-                  Log out
-                </Button>
-              </>
-            ) : (
-              <Link as={Button} href="/login">
-                Login
+          <Select defaultValue={locale} onChange={handleLocaleChange}>
+            {locales.map((language, index) => {
+              return (
+                <option key={index} value={language}>
+                  {languages[language]}
+                </option>
+              );
+            })}
+          </Select>
+          <IconButton
+            aria-label="toggle dark/light mode"
+            icon={
+              colorMode === "light" ? <FiSun size={18} /> : <FiMoon size={18} />
+            }
+            onClick={toggleColorMode}
+          />
+          {user ? (
+            <>
+              <Link as={Button} href="/authenticated">
+                {t("profile")}
               </Link>
-            )}
-          </HStack>
+              <Button colorScheme="teal" onClick={signUserOut}>
+                {t("logout")}
+              </Button>
+            </>
+          ) : (
+            <Link as={Button} href="/login">
+              {t("login")}
+            </Link>
+          )}
         </Grid>
       </Flex>
     </Container>
