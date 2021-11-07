@@ -13,6 +13,9 @@ const en = {
   createAccount: "Create account",
   requiredField: "This field is required",
   footer: "Made with 💙 by",
+  about: "About Us",
+  posts: "Posts",
+  welcome: "Welcome",
 };
 
 const fr: DefaultLanguageResource = {
@@ -25,6 +28,9 @@ const fr: DefaultLanguageResource = {
   createAccount: "Créer un compte",
   requiredField: "Ce champs est obligatoire",
   footer: "Fait avec amour 💙 par",
+  about: "Découvrez-nous",
+  posts: "Nos articles",
+  welcome: "Bienvenue",
 };
 
 const resources = {

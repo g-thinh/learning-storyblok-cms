@@ -24,7 +24,7 @@ export default function FormLogin() {
 
   async function signUserIn({ email, password }: Api.UserForm) {
     return signInWithEmailAndPassword(firebaseAuth, email, password)
-      .then(() => Router.push("/authenticated"))
+      .then(() => Router.push("/profile"))
       .catch((error) =>
         setError("email", {
           type: "manual",

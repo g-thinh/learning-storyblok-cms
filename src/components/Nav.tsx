@@ -32,22 +32,44 @@ export default function Nav() {
   };
 
   return (
-    <Container maxW="100%" px={4} py={2}>
-      <Flex sx={{ justifyContent: "space-between" }}>
-        <Link
-          fontSize={[32, 36]}
-          fontWeight="bold"
-          href="/"
-          sx={{
-            ":hover": {
-              textDecoration: "none",
-              color: "teal.500",
-            },
-          }}
+    <Container maxW="100%" px={4} py={2} width="100%">
+      <Flex justifyContent="space-between">
+        <Flex
+          flexDir={{ sm: "column", md: "row" }}
+          width={{ sm: "100%", md: "auto" }}
         >
-          Simple Hub.
-        </Link>
+          <Link
+            fontSize={[32, 36]}
+            fontWeight="bold"
+            mr={{ sm: 0, md: "64px" }}
+            textAlign={{ sm: "center" }}
+            href="/"
+            sx={{
+              ":hover": {
+                textDecoration: "none",
+                color: "teal.500",
+              },
+            }}
+          >
+            Simple Hub.
+          </Link>
+          <Grid
+            fontSize="2xl"
+            fontWeight="bold"
+            mt={{ sm: 3, md: 2 }}
+            sx={{
+              gridAutoFlow: "column",
+              gap: 24,
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Link href="/posts">{t("posts")}</Link>
+            <Link href="/about">{t("about")}</Link>
+          </Grid>
+        </Flex>
         <Grid
+          display={{ sm: "none", md: "grid" }}
           sx={{
             gridAutoFlow: "column",
             gap: 16,
@@ -72,7 +94,7 @@ export default function Nav() {
           />
           {user ? (
             <>
-              <Link as={Button} href="/authenticated">
+              <Link as={Button} href="/profile">
                 {t("profile")}
               </Link>
               <Button colorScheme="teal" onClick={signUserOut}>
