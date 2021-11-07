@@ -32,3 +32,8 @@ export type StoryblokLink = {
   is_startpage: boolean;
   real_path: string;
 };
+
+export type LinkParams = {
+  starts_with?: string;
+  version?: "published" | "draft";
+};

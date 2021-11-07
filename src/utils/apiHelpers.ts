@@ -1,5 +1,9 @@
 import Storyblok from "services/storyblok";
-import { StoryParams, StoryblokResult } from "storyblok-js-client";
+import {
+  StoryParams,
+  StoriesParams,
+  StoryblokResult,
+} from "storyblok-js-client";
 import * as Api from "types/api";
 
 export async function getStory(
@@ -8,6 +12,11 @@ export async function getStory(
 ): Promise<Api.StoryResult> {
   const response = await Storyblok.getStory(slug, params);
   return response.data.story;
+}
+
+export async function getStories(params?: StoriesParams) {
+  const response = await Storyblok.getStories(params);
+  return response.data.stories;
 }
 
 interface GetPathsResult extends StoryblokResult {
@@ -20,15 +29,14 @@ type LinkPath = {
   };
 };
 
-export async function getPaths() {
-  const response: GetPathsResult = await Storyblok.get("cdn/links");
+export async function getPaths(params?: Api.LinkParams) {
+  const response: GetPathsResult = await Storyblok.get("cdn/links", params);
   const { links } = response.data;
-  console.log("Links", links);
   let paths: LinkPath[] = [];
 
   // get array for slug because of catch all
   Object.keys(links).forEach((link_id) => {
-    if (!links[link_id].is_folder || links[link_id].slug != "home") {
+    if (!links[link_id].is_startpage) {
       const slug = links[link_id].slug;
       const splittedSlug = slug.split("/");
       const result = {
@@ -36,7 +44,6 @@ export async function getPaths() {
           slug: splittedSlug,
         },
       };
-      console.log("result", result);
       paths.push(result);
     }
   });
