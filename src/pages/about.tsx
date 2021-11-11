@@ -24,7 +24,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
 export default function AboutPage(
   props: InferGetStaticPropsType<typeof getStaticProps>
 ) {
-  const story = useStoryblok(props.story, props.preview, props.locale);
+  const story = useStoryblok(props.story);
   const { t } = useTranslation();
   return (
     <Container>
