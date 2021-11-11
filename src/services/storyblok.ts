@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import StoryblokClient, { StoryData } from "storyblok-js-client";
+import { useRouter } from "next/router";
 
 declare global {
   interface Window {
@@ -15,18 +16,21 @@ const Storyblok = new StoryblokClient({
   },
 });
 
-export function useStoryblok<T extends StoryData>(
-  originalStory: T,
-  preview: boolean,
-  locale?: string
-) {
+export function useStoryblok<T extends StoryData>(originalStory: T) {
   const [story, setStory] = useState<T>(originalStory);
+  const { locale } = useRouter();
 
   // adds the events for updating the visual editor
   const initEventListeners = () => {
     const { StoryblokBridge } = window;
     if (typeof StoryblokBridge !== "undefined") {
       const storyblokInstance = new StoryblokBridge();
+
+      storyblokInstance.pingEditor(() => {
+        if (storyblokInstance.isInEditor()) {
+          console.log("Currently viewing from Editor");
+        }
+      });
 
       // reload on Next.js page on save or publish event in the Visual Editor
       storyblokInstance.on(["change", "published"], () => location.reload());
@@ -76,11 +80,17 @@ export function useStoryblok<T extends StoryData>(
 
   useEffect(() => {
     setStory(originalStory); //update the story on locale change inside getServerSideProps
-    if (preview) {
+    // if (preview) {
+    //   addBridge(initEventListeners);
+    // }
+
+    //Storyblok Editors automatically create a bridge inside the Visual Editor
+    if (window.location.search.includes("_storyblok")) {
+      // load the bridge only inside of Storyblok
       addBridge(initEventListeners);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [originalStory, preview]);
+  }, [originalStory]);
   return story;
 }
 

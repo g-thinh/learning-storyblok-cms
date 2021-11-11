@@ -8,8 +8,10 @@ import {
 } from "@chakra-ui/react";
 import Link from "components/Link";
 import { FiGithub } from "react-icons/fi";
+import useTranslation from "hooks/useTranslation";
 
 export default function Footer() {
+  const { t } = useTranslation();
   const { colorMode } = useColorMode();
   return (
     <Box
@@ -28,7 +30,7 @@ export default function Footer() {
             color: "gray.600",
           }}
         >
-          <Text mr={1}>A template by</Text>
+          <Text mr={1}>{t("footer")}</Text>
           <Link
             sx={{ display: "inline-flex", alignItems: "center" }}
             href="https://github.com/g-thinh/firebase-ssr"

@@ -9,13 +9,15 @@ import {
 } from "@chakra-ui/react";
 import FormCreateAccount from "components/FormCreateAccount";
 import FormLogin from "components/FormLogin";
+import useTranslation from "hooks/useTranslation";
 
 export default function Home() {
+  const { t } = useTranslation();
   return (
     <Container>
       <Container m="auto">
         <Heading as="h1" mb={6} textAlign="center">
-          Login Page
+          {t("loginPage")}
         </Heading>
         <Tabs
           isFitted
@@ -29,8 +31,8 @@ export default function Home() {
           }}
         >
           <TabList>
-            <Tab>Login</Tab>
-            <Tab>Create an Account</Tab>
+            <Tab>{t("login")}</Tab>
+            <Tab>{t("createAccount")}</Tab>
           </TabList>
           <TabPanels>
             <TabPanel>

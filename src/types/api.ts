@@ -23,6 +23,7 @@ export type StoryblokLinks = {
 export type StoryblokLink = {
   id: number;
   slug: string;
+  name: string;
   is_folder: boolean;
   parent_id: number;
   published: boolean;
@@ -31,4 +32,9 @@ export type StoryblokLink = {
   uuid: string;
   is_startpage: boolean;
   real_path: string;
+};
+
+export type LinkParams = {
+  starts_with?: string;
+  version?: "published" | "draft";
 };

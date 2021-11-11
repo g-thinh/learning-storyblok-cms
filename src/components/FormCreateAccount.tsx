@@ -7,12 +7,14 @@ import {
   Input,
 } from "@chakra-ui/react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import useTranslation from "hooks/useTranslation";
 import Router from "next/router";
 import { useForm } from "react-hook-form";
 import { firebaseAuth } from "services/firebase";
 import * as Api from "types/api";
 
 export default function FormCreateAccount() {
+  const { t } = useTranslation();
   const {
     handleSubmit,
     register,
@@ -34,12 +36,12 @@ export default function FormCreateAccount() {
   return (
     <Box as="form" onSubmit={handleSubmit(createUser)}>
       <FormControl isInvalid={!!errors.email} mb={4}>
-        <FormLabel>Email address</FormLabel>
+        <FormLabel>{t("email")}</FormLabel>
         <Input
           id="email"
           type="email"
           {...register("email", {
-            required: "This is required",
+            required: t("requiredField"),
           })}
         />
         <FormErrorMessage>
@@ -47,12 +49,12 @@ export default function FormCreateAccount() {
         </FormErrorMessage>
       </FormControl>
       <FormControl isInvalid={!!errors.password}>
-        <FormLabel>Password</FormLabel>
+        <FormLabel>{t("password")}</FormLabel>
         <Input
           id="password"
           type="password"
           {...register("password", {
-            required: "This is required",
+            required: t("requiredField"),
           })}
         />
         <FormErrorMessage>
@@ -60,7 +62,7 @@ export default function FormCreateAccount() {
         </FormErrorMessage>
       </FormControl>
       <Button mt={4} colorScheme="teal" isLoading={isSubmitting} type="submit">
-        Create Account
+        {t("createAccount")}
       </Button>
     </Box>
   );

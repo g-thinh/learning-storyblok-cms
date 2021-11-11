@@ -1,11 +1,12 @@
 import { Box, Container, Heading } from "@chakra-ui/react";
 import RenderRichText from "components/RenderRichText";
+import useTranslation from "hooks/useTranslation";
 import { GetStaticPropsContext, InferGetStaticPropsType } from "next";
 import { useStoryblok } from "services/storyblok";
 import { getStory } from "utils/apiHelpers";
 
 export async function getStaticProps(context: GetStaticPropsContext) {
-  const story = await getStory("home", {
+  const story = await getStory("about", {
     version: context.preview ? "draft" : "published",
     language: context.locale,
   });
@@ -20,27 +21,18 @@ export async function getStaticProps(context: GetStaticPropsContext) {
   };
 }
 
-export async function getStaticPaths() {
-  return {
-    paths: [],
-    fallback: "blocking",
-  };
-}
-
-export default function HomePage(
+export default function AboutPage(
   props: InferGetStaticPropsType<typeof getStaticProps>
 ) {
   const story = useStoryblok(props.story);
+  const { t } = useTranslation();
   return (
-    <Container maxW="100%">
-      <Container m="auto" maxW="72rem" p={0}>
+    <Container>
+      <Container m="auto">
         <Heading as="h1" mb={6} textAlign="center">
-          {story.content.title}
+          {t("about")}
         </Heading>
-        <Heading as="h2" mb={6} textAlign="center">
-          {props.locale}
-        </Heading>
-        <Container maxW="64rem">
+        <Container p={4}>
           <Box>{RenderRichText(story.content.body)}</Box>
         </Container>
       </Container>
