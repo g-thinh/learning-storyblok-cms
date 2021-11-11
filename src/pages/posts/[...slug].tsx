@@ -1,8 +1,12 @@
 import { Box, Container, Heading } from "@chakra-ui/react";
 import RenderRichText from "components/RenderRichText";
-import { GetStaticPropsContext, InferGetStaticPropsType } from "next";
-import { useStoryblok } from "services/storyblok";
-import { getPaths, getStory } from "utils/apiHelpers";
+import {
+  GetStaticPathsContext,
+  GetStaticPropsContext,
+  InferGetStaticPropsType,
+} from "next";
+import Storyblok, { useStoryblok } from "services/storyblok";
+import { getStoriesPaths, getStory } from "utils/apiHelpers";
 
 export async function getStaticProps(context: GetStaticPropsContext) {
   const {
@@ -25,12 +29,10 @@ export async function getStaticProps(context: GetStaticPropsContext) {
   };
 }
 
-export async function getStaticPaths() {
-  const paths = await getPaths({
-    starts_with: "posts",
-  });
+export async function getStaticPaths({ locales }: GetStaticPathsContext) {
+  const paths = await getStoriesPaths({ starts_with: "posts" }, locales);
   return {
-    paths: paths,
+    paths,
     fallback: "blocking",
   };
 }
@@ -38,7 +40,7 @@ export async function getStaticPaths() {
 export default function PostPage(
   props: InferGetStaticPropsType<typeof getStaticProps>
 ) {
-  const story = useStoryblok(props.story, props.preview, props.locale);
+  const story = useStoryblok(props.story);
   return (
     <Container maxW="100%">
       <Container m="auto" maxW="72rem">

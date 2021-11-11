@@ -29,24 +29,31 @@ type LinkPath = {
   };
 };
 
-export async function getPaths(params?: Api.LinkParams) {
+//next thing to do is to prepare all possible slugs with locales
+export async function getStoriesPaths(
+  params?: Api.LinkParams,
+  locales?: string[]
+) {
   const response: GetPathsResult = await Storyblok.get("cdn/links", params);
   const { links } = response.data;
   let paths: LinkPath[] = [];
 
   // get array for slug because of catch all
-  Object.keys(links).forEach((link_id) => {
-    if (!links[link_id].is_startpage) {
-      const slug = links[link_id].slug;
-      const splittedSlug = slug.split("/");
-      const result = {
-        params: {
-          slug: splittedSlug,
-        },
-      };
-      paths.push(result);
-    }
-  });
+  for (const locale of locales) {
+    Object.keys(links).forEach((link_id) => {
+      if (!links[link_id].is_startpage && !links[link_id].is_folder) {
+        const slug = links[link_id].name;
+        const splittedSlug = slug.split("/");
+        const result = {
+          params: {
+            slug: splittedSlug,
+            locale,
+          },
+        };
+        paths.push(result);
+      }
+    });
+  }
 
   return paths;
 }

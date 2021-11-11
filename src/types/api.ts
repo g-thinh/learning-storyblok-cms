@@ -23,6 +23,7 @@ export type StoryblokLinks = {
 export type StoryblokLink = {
   id: number;
   slug: string;
+  name: string;
   is_folder: boolean;
   parent_id: number;
   published: boolean;

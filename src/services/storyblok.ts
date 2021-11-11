@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import StoryblokClient, { StoryData } from "storyblok-js-client";
+import { useRouter } from "next/router";
 
 declare global {
   interface Window {
@@ -15,12 +16,9 @@ const Storyblok = new StoryblokClient({
   },
 });
 
-export function useStoryblok<T extends StoryData>(
-  originalStory: T,
-  preview: boolean,
-  locale?: string
-) {
+export function useStoryblok<T extends StoryData>(originalStory: T) {
   const [story, setStory] = useState<T>(originalStory);
+  const { locale } = useRouter();
 
   // adds the events for updating the visual editor
   const initEventListeners = () => {
@@ -92,7 +90,7 @@ export function useStoryblok<T extends StoryData>(
       addBridge(initEventListeners);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [originalStory, preview]);
+  }, [originalStory]);
   return story;
 }
 
