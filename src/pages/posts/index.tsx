@@ -33,7 +33,7 @@ export async function getStaticProps(context: GetStaticPropsContext) {
 export default function PostPage(
   props: InferGetStaticPropsType<typeof getStaticProps>
 ) {
-  const story = useStoryblok(props.story, props.preview, props.locale);
+  const story = useStoryblok(props.story);
 
   return (
     <Container maxW="100%">
