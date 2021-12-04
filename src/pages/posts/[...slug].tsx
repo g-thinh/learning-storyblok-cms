@@ -5,7 +5,7 @@ import {
   GetStaticPropsContext,
   InferGetStaticPropsType,
 } from "next";
-import Storyblok, { useStoryblok } from "services/storyblok";
+import { useStoryblok } from "services/storyblok";
 import { getStoriesPaths, getStory } from "utils/apiHelpers";
 
 export async function getStaticProps(context: GetStaticPropsContext) {
