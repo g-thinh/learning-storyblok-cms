@@ -16,6 +16,8 @@ const en = {
   about: "About Us",
   posts: "Posts",
   welcome: "Welcome",
+  tryNow: "Try Now",
+  learnMore: "Learn More",
 };
 
 const fr: DefaultLanguageResource = {
@@ -31,6 +33,8 @@ const fr: DefaultLanguageResource = {
   about: "Découvrez-nous",
   posts: "Nos articles",
   welcome: "Bienvenue",
+  tryNow: "Essayez maintenant",
+  learnMore: "Apprendre plus",
 };
 
 const resources = {

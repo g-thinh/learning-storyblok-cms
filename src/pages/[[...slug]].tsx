@@ -6,8 +6,10 @@ import { getStory } from "utils/apiHelpers";
 
 export async function getStaticProps(context: GetStaticPropsContext) {
   const story = await getStory("home", {
-    version: context.preview ? "draft" : "published",
+    // version: context.preview ? "draft" : "published",
+    version: "draft",
     language: context.locale,
+    cv: Date.now(),
   });
 
   return {
@@ -32,18 +34,14 @@ export default function HomePage(
 ) {
   const story = useStoryblok(props.story);
   return (
-    <Container maxW="100%">
-      <Container m="auto" maxW="72rem" p={0}>
-        <Heading as="h1" mb={6} textAlign="center">
-          {story.content.title}
-        </Heading>
-        <Heading as="h2" mb={6} textAlign="center">
-          {props.locale}
-        </Heading>
-        <Container maxW="64rem">
-          <Box>{RenderRichText(story.content.body)}</Box>
-        </Container>
-      </Container>
+    <Container maxW="100%" p={0}>
+      <Box
+        mx="auto"
+        p={3}
+        maxW={{ sm: "100rem", md: "52rem", lg: "58rem", xl: "72rem" }}
+      >
+        {RenderRichText(story.content.body)}
+      </Box>
     </Container>
   );
 }

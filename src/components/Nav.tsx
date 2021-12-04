@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   Container,
   Flex,
@@ -41,7 +42,7 @@ export default function Nav() {
           <Link
             fontSize={[32, 36]}
             fontWeight="bold"
-            mr={{ sm: 0, md: "64px" }}
+            mr={{ sm: 0, md: "48px" }}
             textAlign={{ sm: "center" }}
             href="/"
             sx={{
@@ -54,7 +55,7 @@ export default function Nav() {
             Simple Hub.
           </Link>
           <Grid
-            fontSize="2xl"
+            fontSize="lg"
             fontWeight="bold"
             mt={{ sm: 3, md: 2 }}
             sx={{
@@ -79,9 +80,9 @@ export default function Nav() {
           <Select defaultValue={locale} onChange={handleLocaleChange}>
             {locales.map((language, index) => {
               return (
-                <option key={index} value={language}>
+                <Box as="option" key={index} value={language}>
                   {languages[language]}
-                </option>
+                </Box>
               );
             })}
           </Select>
@@ -97,13 +98,17 @@ export default function Nav() {
               <Link as={Button} href="/profile">
                 {t("profile")}
               </Link>
-              <Button colorScheme="teal" onClick={signUserOut}>
+              <Button colorScheme="red" onClick={signUserOut}>
                 {t("logout")}
               </Button>
             </>
           ) : (
-            <Link as={Button} href="/login">
-              {t("login")}
+            <Link
+              colorScheme="teal"
+              href="/login"
+              sx={{ ":hover": { textDecoration: "none" } }}
+            >
+              <Button colorScheme="teal">{t("login")}</Button>
             </Link>
           )}
         </Grid>
