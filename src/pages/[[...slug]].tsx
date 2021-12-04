@@ -38,7 +38,7 @@ export default function HomePage(
       <Box
         mx="auto"
         p={3}
-        maxW={{ sm: "100rem", md: "52rem", lg: "58rem", xl: "72rem" }}
+        maxW={{ base: "100rem", md: "52rem", lg: "58rem", xl: "72rem" }}
       >
         {RenderRichText(story.content.body)}
       </Box>

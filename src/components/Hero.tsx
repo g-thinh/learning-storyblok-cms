@@ -32,14 +32,14 @@ export default function Hero(props: HeroProps) {
   const { colorMode } = useColorMode();
   const { t } = useTranslation();
   return (
-    <Flex mb={8} p={4} flexDir={{ sm: "column", md: "row" }}>
+    <Flex mb={8} p={0} flexDir={{ base: "column", md: "row" }}>
       <Flex
         flex={1}
-        width={{ sm: "100%", md: "40%" }}
+        width={{ base: "100%", md: "40%" }}
         flexDir="column"
         justify="center"
         mr={3}
-        mb={{ sm: "1rem", md: 0 }}
+        mb={{ base: "1rem", md: 0 }}
       >
         <Heading
           as="h1"
