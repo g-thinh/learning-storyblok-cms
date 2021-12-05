@@ -10,9 +10,32 @@ export type UserForm = {
   password: string;
 };
 
-export type StoryResult = StoryData<
-  StoryblokComponent<string> & { title?: string; body?: Richtext }
->;
+export type StoryResult<T> = StoryData<StoryblokComponent<string> & T>;
+
+export type StoryPost = {
+  title?: string;
+  body?: Richtext;
+  intro?: string;
+  image?: SingleImageAsset;
+  author?: string;
+};
+
+type SingleImageAsset = {
+  alt?: string;
+  copyrigh?: string;
+  fieldtype?: "asset";
+  filename?: string;
+  focus?: null;
+  id?: number;
+  name?: string;
+  title?: string;
+};
+
+export type StoryAuthor = {
+  name?: string;
+  avatar?: SingleImageAsset;
+  bio?: Richtext;
+};
 
 export type StoryblokLinks = {
   links: {
