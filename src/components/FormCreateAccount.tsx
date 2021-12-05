@@ -11,7 +11,7 @@ import useTranslation from "hooks/useTranslation";
 import Router from "next/router";
 import { useForm } from "react-hook-form";
 import { firebaseAuth } from "services/firebase";
-import * as Api from "types/api";
+import { UserForm } from "types/api";
 
 export default function FormCreateAccount() {
   const { t } = useTranslation();
@@ -20,9 +20,9 @@ export default function FormCreateAccount() {
     register,
     setError,
     formState: { errors, isSubmitting },
-  } = useForm<Api.UserForm>();
+  } = useForm<UserForm>();
 
-  async function createUser({ email, password }: Api.UserForm) {
+  async function createUser({ email, password }: UserForm) {
     return createUserWithEmailAndPassword(firebaseAuth, email, password)
       .then(() => Router.push("/authenticated"))
       .catch((error) =>
