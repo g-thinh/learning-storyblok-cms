@@ -1,32 +1,22 @@
 import {
-  Avatar,
   AspectRatio,
-  Divider,
+  Avatar,
   Box,
   Container,
+  Divider,
   Heading,
   HStack,
   Text,
   useColorMode,
 } from "@chakra-ui/react";
-import NextImage from "next/image";
-import { useRouter } from "next/router";
 import RenderRichText from "components/RenderRichText";
-import dayjs from "dayjs";
-import "dayjs/locale/fr";
-import advancedFormat from "dayjs/plugin/advancedFormat";
-import LocalizedFormat from "dayjs/plugin/localizedFormat";
-import {
-  GetStaticPathsContext,
-  GetStaticPropsContext,
-  InferGetStaticPropsType,
-} from "next";
+import Time from "components/Time";
+import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
+import NextImage from "next/image";
 import { useStoryblok } from "services/storyblok";
-import { getAuthor, getStoriesPaths, getStory } from "utils/apiHelpers";
-dayjs.extend(advancedFormat);
-dayjs.extend(LocalizedFormat);
+import { getAuthor, getStory } from "utils/apiHelpers";
 
-export async function getStaticProps(context: GetStaticPropsContext) {
+export async function getServerSideProps(context: GetServerSidePropsContext) {
   const {
     params: { slug },
   } = context;
@@ -46,26 +36,14 @@ export async function getStaticProps(context: GetStaticPropsContext) {
       preview: context.preview || false,
       locale: context.locale,
     },
-    revalidate: 60 * 60,
-  };
-}
-
-export async function getStaticPaths({ locales }: GetStaticPathsContext) {
-  const paths = await getStoriesPaths({ starts_with: "posts" }, locales);
-  return {
-    paths,
-    fallback: "blocking",
   };
 }
 
 export default function PostPage(
-  props: InferGetStaticPropsType<typeof getStaticProps>
+  props: InferGetServerSidePropsType<typeof getServerSideProps>
 ) {
-  const { locale } = useRouter();
   const { colorMode } = useColorMode();
   const story = useStoryblok(props.story);
-
-  console.log("current locale", locale);
 
   return (
     <Container maxW="100%">
@@ -91,9 +69,7 @@ export default function PostPage(
             src={props.author.content.avatar.filename}
           />
           <Text>{props.author.content.name}</Text>
-          <Text color="gray.500">
-            {dayjs(story.first_published_at).locale(locale).format("LL")}
-          </Text>
+          <Time time={story.first_published_at} color="gray.500" />
         </HStack>
         <AspectRatio ratio={16 / 9} borderRadius="md" overflow="hidden" my={3}>
           <NextImage

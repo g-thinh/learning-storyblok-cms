@@ -51,7 +51,7 @@ export default function Drawer() {
 
           <DrawerBody>
             <Flex flexDir="column" justifyContent="space-between" height="100%">
-              <Grid gap={3} fontSize="xl">
+              <Grid gap={3} fontSize="xl" onClick={onClose}>
                 <Link href="/posts">{t("posts")}</Link>
                 <Link href="/about">{t("about")}</Link>
               </Grid>

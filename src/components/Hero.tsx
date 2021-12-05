@@ -1,6 +1,5 @@
 import {
   AspectRatio,
-  Box,
   Button,
   Flex,
   Heading,
@@ -82,6 +81,7 @@ export default function Hero(props: HeroProps) {
           layout="fill"
           placeholder="blur"
           blurDataURL={props.image.filename}
+          priority
         />
       </AspectRatio>
     </Flex>
