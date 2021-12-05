@@ -9,8 +9,18 @@ import * as Api from "types/api";
 export async function getStory(
   slug: string,
   params?: StoryParams
-): Promise<Api.StoryResult> {
+): Promise<Api.StoryResult<Api.StoryPost>> {
   const response = await Storyblok.getStory(slug, params);
+  return response.data.story;
+}
+
+//Stories are linked to the authors folder and only return a UUID
+export async function getAuthor(
+  slug: string
+): Promise<Api.StoryResult<Api.StoryAuthor>> {
+  const response = await Storyblok.getStory(slug, {
+    find_by: "uuid",
+  });
   return response.data.story;
 }
 

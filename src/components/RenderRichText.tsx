@@ -1,14 +1,45 @@
-import { Text } from "@chakra-ui/react";
+import { Box, Heading, ListItem, Text, UnorderedList } from "@chakra-ui/react";
 import {
   render,
   RenderOptionsProps,
 } from "storyblok-rich-text-react-renderer-ts";
+import Hero, { HeroProps } from "./Hero";
 
 export const StoryblokResolvers: RenderOptionsProps = {
   nodeResolvers: {
-    paragraph: (children) => <Text mb={4}>{children}</Text>,
+    paragraph: (children) => (
+      <Text fontSize="lg" mb={6}>
+        {children}
+      </Text>
+    ),
+    heading: (children, attrs) => {
+      return (
+        <Heading mb={3} fontSize="xl" fontWeight="bold" as={`h${attrs.level}`}>
+          {children}
+        </Heading>
+      );
+    },
+    bullet_list: (children) => (
+      <UnorderedList spacing={3}>{children}</UnorderedList>
+    ),
+    list_item: (children) => {
+      return <ListItem sx={{ p: { marginBottom: 0 } }}>{children}</ListItem>;
+    },
   },
-  blokResolvers: {},
+  blokResolvers: {
+    "Hero Image": (props: HeroProps) => {
+      return <Hero {...props} />;
+    },
+    Divider: () => (
+      <Box
+        bgGradient="linear(to-r, teal.200,teal.300, teal.600)"
+        borderRadius="sm"
+        height={1}
+        width="100%"
+        my={4}
+      />
+    ),
+  },
   markResolvers: {},
   defaultBlokResolver: (name) => (
     <Text color="red" fontWeight="bold">

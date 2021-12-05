@@ -16,6 +16,8 @@ const en = {
   about: "About Us",
   posts: "Posts",
   welcome: "Welcome",
+  tryNow: "Try Now",
+  learnMore: "Learn More",
 };
 
 const fr: DefaultLanguageResource = {
@@ -31,6 +33,8 @@ const fr: DefaultLanguageResource = {
   about: "Découvrez-nous",
   posts: "Nos articles",
   welcome: "Bienvenue",
+  tryNow: "Essayez maintenant",
+  learnMore: "Apprendre plus",
 };
 
 const resources = {
@@ -38,12 +42,23 @@ const resources = {
   fr,
 } as const;
 
+type Resources = keyof typeof resources;
+
+type TranslatedLanguageName = {
+  [language in Resources]: string;
+};
+
 export default function useTranslation() {
   const { locales, locale } = useRouter();
+
+  const languages: TranslatedLanguageName = {
+    en: "English",
+    fr: "Français",
+  };
 
   function t(key: LanguageKey) {
     return resources[locale][key];
   }
 
-  return { t, locales, locale };
+  return { t, locales, locale, languages };
 }
