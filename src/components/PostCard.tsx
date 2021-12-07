@@ -139,7 +139,7 @@ export function TopPost({ story }: PostCardProps) {
         <Author
           mt={0}
           authorId={story.content.author}
-          date={"2021-04-06T19:01:27Z"}
+          date={story.first_published_at}
         />
       </Box>
     </Box>

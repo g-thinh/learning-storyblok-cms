@@ -12,18 +12,19 @@ import useTranslation from "hooks/useTranslation";
 import { GetStaticPropsContext, InferGetStaticPropsType } from "next";
 import { useStoryblok } from "services/storyblok";
 import { getStories, getStory } from "utils/apiHelpers";
+import isDev from "utils/isDev";
 
 export async function getStaticProps(context: GetStaticPropsContext) {
   const allStories = await getStories({
     starts_with: "posts",
     is_startpage: 0,
-    version: context.preview ? "draft" : "published",
+    version: isDev() ? "draft" : "published",
     language: context.locale,
     cv: Date.now(),
   });
 
   const story = await getStory("posts", {
-    version: context.preview ? "draft" : "published",
+    version: isDev() ? "draft" : "published",
     language: context.locale,
   });
 
