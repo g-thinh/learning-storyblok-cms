@@ -3,7 +3,6 @@ import {
   render,
   RenderOptionsProps,
 } from "storyblok-rich-text-react-renderer-ts";
-import Hero, { HeroProps } from "./Hero";
 
 export const StoryblokResolvers: RenderOptionsProps = {
   nodeResolvers: {
@@ -27,9 +26,6 @@ export const StoryblokResolvers: RenderOptionsProps = {
     },
   },
   blokResolvers: {
-    "Hero Image": (props: HeroProps) => {
-      return <Hero {...props} />;
-    },
     Divider: () => (
       <Box
         bgGradient="linear(to-r, teal.200,teal.300, teal.600)"

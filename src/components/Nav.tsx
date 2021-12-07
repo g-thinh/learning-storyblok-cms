@@ -1,21 +1,13 @@
-import {
-  Button,
-  Container,
-  Flex,
-  Grid,
-  IconButton,
-  useColorMode,
-} from "@chakra-ui/react";
+import { Button, Container, Flex, Grid } from "@chakra-ui/react";
 import Link from "components/Link";
 import { useAuth } from "contexts/AuthContext";
 import useTranslation from "hooks/useTranslation";
-import { FiMoon, FiSun } from "react-icons/fi";
 import { signUserOut } from "utils/firebaseHelpers";
 import Drawer from "./Drawer";
 import LanguagePicker from "./LanguagePicker";
+import ThemeToggleButton from "./ThemeToggleButton";
 
 export default function Nav() {
-  const { colorMode, toggleColorMode } = useColorMode();
   const { user } = useAuth();
   const { t } = useTranslation();
 
@@ -63,13 +55,7 @@ export default function Nav() {
           }}
         >
           <LanguagePicker />
-          <IconButton
-            aria-label="toggle dark/light mode"
-            icon={
-              colorMode === "light" ? <FiSun size={18} /> : <FiMoon size={18} />
-            }
-            onClick={toggleColorMode}
-          />
+          <ThemeToggleButton aria-label="toggle dark/light mode" />
           {user ? (
             <>
               <Link as={Button} href="/profile">

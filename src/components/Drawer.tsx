@@ -11,23 +11,22 @@ import {
   Flex,
   Grid,
   IconButton,
-  useColorMode,
   useDisclosure,
 } from "@chakra-ui/react";
 import { useAuth } from "contexts/AuthContext";
 import useTranslation from "hooks/useTranslation";
 import { useRef } from "react";
-import { FiMenu, FiMoon, FiSun } from "react-icons/fi";
+import { FiMenu } from "react-icons/fi";
 import { signUserOut } from "utils/firebaseHelpers";
 import LanguagePicker from "./LanguagePicker";
 import Link from "./Link";
+import ThemeToggleButton from "./ThemeToggleButton";
 
 export default function Drawer() {
   const { user } = useAuth();
   const { t } = useTranslation();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = useRef<HTMLButtonElement | null>();
-  const { colorMode, toggleColorMode } = useColorMode();
 
   return (
     <Box display={{ sm: "block", md: "none" }}>
@@ -48,7 +47,6 @@ export default function Drawer() {
         <DrawerContent>
           <DrawerCloseButton />
           <DrawerHeader>Main Navigation</DrawerHeader>
-
           <DrawerBody>
             <Flex flexDir="column" justifyContent="space-between" height="100%">
               <Grid gap={3} fontSize="xl" onClick={onClose}>
@@ -58,20 +56,9 @@ export default function Drawer() {
               <LanguagePicker />
             </Flex>
           </DrawerBody>
-
           <DrawerFooter>
             <Grid gap={3} gridAutoFlow="column">
-              <IconButton
-                aria-label="toggle dark/light mode"
-                icon={
-                  colorMode === "light" ? (
-                    <FiSun size={18} />
-                  ) : (
-                    <FiMoon size={18} />
-                  )
-                }
-                onClick={toggleColorMode}
-              />
+              <ThemeToggleButton aria-label="toggle dark/light mode" />
               {user ? (
                 <>
                   <Link as={Button} href="/profile">

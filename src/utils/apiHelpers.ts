@@ -4,33 +4,52 @@ import {
   StoriesParams,
   StoryblokResult,
 } from "storyblok-js-client";
-import * as Api from "types/api";
+import {
+  StoryResult,
+  StoryPost,
+  StoryAuthor,
+  StoryblokLinks,
+  LinkParams,
+  Tag,
+} from "types/api";
+import Router from "next/router";
 
 export async function getStory(
   slug: string,
   params?: StoryParams
-): Promise<Api.StoryResult<Api.StoryPost>> {
+): Promise<StoryResult<StoryPost>> {
   const response = await Storyblok.getStory(slug, params);
+  return response.data.story;
+}
+
+export async function getTag(tagId: string): Promise<StoryResult<Tag>> {
+  const { locale } = Router;
+  const response = await Storyblok.getStory(tagId, {
+    find_by: "uuid",
+    language: locale,
+  });
   return response.data.story;
 }
 
 //Stories are linked to the authors folder and only return a UUID
 export async function getAuthor(
   slug: string
-): Promise<Api.StoryResult<Api.StoryAuthor>> {
+): Promise<StoryResult<StoryAuthor>> {
   const response = await Storyblok.getStory(slug, {
     find_by: "uuid",
   });
   return response.data.story;
 }
 
-export async function getStories(params?: StoriesParams) {
+export async function getStories(
+  params?: StoriesParams
+): Promise<StoryResult<StoryPost>[]> {
   const response = await Storyblok.getStories(params);
   return response.data.stories;
 }
 
 interface GetPathsResult extends StoryblokResult {
-  data: Api.StoryblokLinks;
+  data: StoryblokLinks;
 }
 
 type LinkPath = {
@@ -40,10 +59,7 @@ type LinkPath = {
 };
 
 //next thing to do is to prepare all possible slugs with locales
-export async function getStoriesPaths(
-  params?: Api.LinkParams,
-  locales?: string[]
-) {
+export async function getStoriesPaths(params?: LinkParams, locales?: string[]) {
   const response: GetPathsResult = await Storyblok.get("cdn/links", params);
   const { links } = response.data;
   let paths: LinkPath[] = [];

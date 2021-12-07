@@ -4,7 +4,7 @@ import {
   Flex,
   Icon,
   Text,
-  useColorMode,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import Link from "components/Link";
 import { FiGithub } from "react-icons/fi";
@@ -12,13 +12,12 @@ import useTranslation from "hooks/useTranslation";
 
 export default function Footer() {
   const { t } = useTranslation();
-  const { colorMode } = useColorMode();
   return (
     <Box
       width="100%"
       mt={5}
       p={3}
-      bg={colorMode === "dark" ? "gray.900" : "gray.200"}
+      bg={useColorModeValue("gray.200", "gray.900")}
     >
       <Container textAlign="center">
         <Flex
@@ -33,7 +32,7 @@ export default function Footer() {
           <Text mr={1}>{t("footer")}</Text>
           <Link
             sx={{ display: "inline-flex", alignItems: "center" }}
-            href="https://github.com/g-thinh/firebase-ssr"
+            href="https://github.com/g-thinh/simple-hub"
           >
             Gia Thinh Nguyen <Icon ml={1} as={FiGithub} />
           </Link>
