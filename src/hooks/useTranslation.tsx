@@ -18,6 +18,8 @@ const en = {
   welcome: "Welcome",
   tryNow: "Try Now",
   learnMore: "Learn More",
+  latestArticles: "Latest Posts",
+  whatsNew: "What's New?",
 };
 
 const fr: DefaultLanguageResource = {
@@ -35,6 +37,8 @@ const fr: DefaultLanguageResource = {
   welcome: "Bienvenue",
   tryNow: "Essayez maintenant",
   learnMore: "Apprendre plus",
+  latestArticles: "Articles récents",
+  whatsNew: "Quoi de neuf?",
 };
 
 const resources = {

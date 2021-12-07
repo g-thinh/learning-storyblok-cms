@@ -33,6 +33,7 @@ export default function HomePage(
   props: InferGetStaticPropsType<typeof getStaticProps>
 ) {
   const story = useStoryblok(props.story);
+
   return (
     <Container maxW="100%" p={0}>
       <Box

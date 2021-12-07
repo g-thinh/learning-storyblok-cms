@@ -10,13 +10,24 @@ import {
   StoryAuthor,
   StoryblokLinks,
   LinkParams,
+  Tag,
 } from "types/api";
+import Router from "next/router";
 
 export async function getStory(
   slug: string,
   params?: StoryParams
 ): Promise<StoryResult<StoryPost>> {
   const response = await Storyblok.getStory(slug, params);
+  return response.data.story;
+}
+
+export async function getTag(tagId: string): Promise<StoryResult<Tag>> {
+  const { locale } = Router;
+  const response = await Storyblok.getStory(tagId, {
+    find_by: "uuid",
+    language: locale,
+  });
   return response.data.story;
 }
 
@@ -30,7 +41,9 @@ export async function getAuthor(
   return response.data.story;
 }
 
-export async function getStories(params?: StoriesParams) {
+export async function getStories(
+  params?: StoriesParams
+): Promise<StoryResult<StoryPost>[]> {
   const response = await Storyblok.getStories(params);
   return response.data.stories;
 }

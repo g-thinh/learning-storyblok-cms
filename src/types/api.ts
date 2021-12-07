@@ -18,6 +18,11 @@ export type StoryPost = {
   intro?: string;
   image?: SingleImageAsset;
   author?: string;
+  tags?: string[];
+};
+
+export type Tag = {
+  name?: string;
 };
 
 type SingleImageAsset = {
