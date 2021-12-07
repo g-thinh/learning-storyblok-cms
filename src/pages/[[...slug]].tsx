@@ -3,11 +3,12 @@ import RenderRichText from "components/RenderRichText";
 import { GetStaticPropsContext, InferGetStaticPropsType } from "next";
 import { useStoryblok } from "services/storyblok";
 import { getStory } from "utils/apiHelpers";
+import Hero from "components/Hero";
+import isDev from "utils/isDev";
 
 export async function getStaticProps(context: GetStaticPropsContext) {
   const story = await getStory("home", {
-    // version: context.preview ? "draft" : "published",
-    version: "draft",
+    version: isDev() ? "draft" : "published",
     language: context.locale,
     cv: Date.now(),
   });
@@ -36,10 +37,11 @@ export default function HomePage(
 
   return (
     <Container maxW="100%" p={0}>
+      <Hero />
       <Box
         mx="auto"
         p={3}
-        maxW={{ base: "100rem", md: "52rem", lg: "58rem", xl: "72rem" }}
+        maxW={{ base: "100rem", md: "3xl", lg: "5xl", xl: "6xl" }}
       >
         {RenderRichText(story.content.body)}
       </Box>

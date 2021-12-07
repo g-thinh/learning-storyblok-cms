@@ -20,6 +20,13 @@ const en = {
   learnMore: "Learn More",
   latestArticles: "Latest Posts",
   whatsNew: "What's New?",
+  getStarted: "Get started",
+  cta1: "Share Your Story,",
+  cta2: "with Simplicity",
+  cta3: "A platform built to convey your message and tell your story.",
+  error404: "Page Not Found",
+  error404message: "The page youre looking for does not seem to exist",
+  error404cta: "Return to Home",
 };
 
 const fr: DefaultLanguageResource = {
@@ -39,6 +46,13 @@ const fr: DefaultLanguageResource = {
   learnMore: "Apprendre plus",
   latestArticles: "Articles récents",
   whatsNew: "Quoi de neuf?",
+  getStarted: "Commencer",
+  cta1: "Partagez Votre Histoire,",
+  cta2: "avec Simplicité",
+  cta3: "Une plateforme conçue pour transmettre votre message et raconter votre histoire.",
+  error404: "Page non trouvée",
+  error404message: "La page que vous recherchez ne semble pas exister",
+  error404cta: "Retourner à l'accueil",
 };
 
 const resources = {

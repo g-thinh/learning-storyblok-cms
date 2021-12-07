@@ -1,47 +1,59 @@
 import {
-  Avatar,
   Box,
   Container,
   Divider,
   Heading,
-  HStack,
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
+import Author from "components/Author";
 import Image from "components/Image";
 import RenderRichText from "components/RenderRichText";
-import Time from "components/Time";
-import Author from "components/Author";
-import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
-import { useStoryblok } from "services/storyblok";
-import { getAuthor, getStory } from "utils/apiHelpers";
 import Tags from "components/Tags";
+import {
+  GetServerSideProps,
+  GetServerSidePropsContext,
+  InferGetServerSidePropsType,
+} from "next";
+import { useStoryblok } from "services/storyblok";
+import { StoryPost, StoryResult } from "types/api";
+import { getStory } from "utils/apiHelpers";
+import isDev from "utils/isDev";
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const {
     params: { slug },
   } = context;
 
-  const story = await getStory(`posts/${slug[0]}`, {
-    version: context.preview ? "draft" : "published",
-    language: context.locale,
-    cv: Date.now(),
-  });
+  try {
+    const story = await getStory(`posts/${slug[0]}`, {
+      version: isDev() ? "draft" : "published",
+      language: context.locale,
+      cv: Date.now(),
+    });
 
-  const author = await getAuthor(story.content.author);
-
-  return {
-    props: {
-      story: story,
-      author: author,
-      preview: context.preview || false,
-      locale: context.locale,
-    },
-  };
+    return {
+      props: {
+        story,
+        preview: context.preview || false,
+        locale: context.locale,
+      },
+    };
+  } catch {
+    return {
+      notFound: true,
+    };
+  }
 }
 
 export default function PostPage(
-  props: InferGetServerSidePropsType<typeof getServerSideProps>
+  props: InferGetServerSidePropsType<
+    GetServerSideProps<{
+      story: StoryResult<StoryPost>;
+      preview: boolean;
+      locale?: string;
+    }>
+  >
 ) {
   const story = useStoryblok(props.story);
 
