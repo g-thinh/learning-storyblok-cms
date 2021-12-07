@@ -3,7 +3,7 @@ import {
   Container,
   Heading,
   Text,
-  useColorMode,
+  useColorModeValue,
   VStack,
 } from "@chakra-ui/react";
 import { useState } from "react";
@@ -32,7 +32,6 @@ export default function Authenticated(
   const { t } = useTranslation();
   const [isPreview, setIsPreview] = useState(props.preview);
   const [loading, setLoading] = useState(false);
-  const { colorMode } = useColorMode();
   const { email, uid } = props.token;
 
   const handleEnablePreview = async () => {
@@ -62,7 +61,7 @@ export default function Authenticated(
         my={4}
         spacing="16px"
         align="stretch"
-        bg={colorMode === "dark" ? "gray.700" : "gray.200"}
+        bg={useColorModeValue("gray.700", "gray.200")}
         p={4}
         borderRadius={12}
         boxShadow="md"
