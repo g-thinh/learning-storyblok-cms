@@ -10,6 +10,7 @@ import React, { useEffect, useState } from "react";
 import { StoryAuthor, StoryResult } from "types/api";
 import { getAuthor } from "utils/apiHelpers";
 import Time from "./Time";
+import { useRouter } from "next/router";
 
 type AuthorProps = {
   date: string;
@@ -23,6 +24,7 @@ export default function Author({
   ...stackProps
 }: AuthorProps) {
   const [author, setAuthor] = useState<StoryResult<StoryAuthor>>(null);
+  const { locale } = useRouter();
 
   useEffect(() => {
     async function getAvatar() {
@@ -34,7 +36,7 @@ export default function Author({
       }
     }
     getAvatar();
-  }, [authorId]);
+  }, [authorId, locale]);
 
   return (
     <HStack

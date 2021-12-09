@@ -150,7 +150,7 @@ export function PostCard({ story }: PostCardProps) {
   return (
     <Flex flexDir="column" height="100%">
       <Box w="100%">
-        <Box borderRadius="lg" overflow="hidden">
+        <Box borderRadius="lg">
           <Link
             href={`/${story.full_slug}`}
             tabIndex={-1}
