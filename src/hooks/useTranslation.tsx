@@ -55,9 +55,36 @@ const fr: DefaultLanguageResource = {
   error404cta: "Retourner à l'accueil",
 };
 
+const zh = {
+  login: "登录",
+  loginPage: "登录页面",
+  logout: "登出",
+  profile: "帐户",
+  email: "电子邮件",
+  password: "密码",
+  createAccount: "创建账户",
+  requiredField: "此表格为必填项",
+  footer: "Made with 💙 by",
+  about: "关于我们",
+  posts: "文章",
+  welcome: "欢迎",
+  tryNow: "现在试试",
+  learnMore: "了解更多",
+  latestArticles: "最新的文章",
+  whatsNew: "什么是新的?",
+  getStarted: "开始",
+  cta1: "简单分享",
+  cta2: "你的故事",
+  cta3: "一个旨在传达您的信息并讲述您的故事的网站。",
+  error404: "找不到网页",
+  error404message: "您要找的页面似乎不存在",
+  error404cta: "返回主页",
+};
+
 const resources = {
   en,
   fr,
+  zh,
 } as const;
 
 type Resources = keyof typeof resources;
@@ -72,6 +99,7 @@ export default function useTranslation() {
   const languages: TranslatedLanguageName = {
     en: "English",
     fr: "Français",
+    zh: "简体中文",
   };
 
   function t(key: LanguageKey) {

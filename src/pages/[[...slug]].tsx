@@ -1,4 +1,4 @@
-import { Box, Container } from "@chakra-ui/react";
+import { Box, Container, Divider } from "@chakra-ui/react";
 import RenderRichText from "components/RenderRichText";
 import { GetStaticPropsContext, InferGetStaticPropsType } from "next";
 import { useStoryblok } from "services/storyblok";
@@ -36,8 +36,15 @@ export default function HomePage(
   const story = useStoryblok(props.story);
 
   return (
-    <Container maxW="100%" p={0}>
+    <Container maxW={{ base: "100%", sm: "5xl", lg: "6xl" }}>
       <Hero />
+      <Divider
+        bgGradient="linear(to-r, teal.200,teal.300, teal.600)"
+        borderRadius="sm"
+        height={1}
+        width="100%"
+        my={8}
+      />
       <Box
         mx="auto"
         p={3}
