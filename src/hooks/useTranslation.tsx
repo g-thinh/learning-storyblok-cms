@@ -27,6 +27,9 @@ const en = {
   error404: "Page Not Found",
   error404message: "The page youre looking for does not seem to exist",
   error404cta: "Return to Home",
+  navigation: "Navigation",
+  languages: "Languages",
+  underConstruction: "Under construction",
 };
 
 const fr: DefaultLanguageResource = {
@@ -53,9 +56,12 @@ const fr: DefaultLanguageResource = {
   error404: "Page non trouvée",
   error404message: "La page que vous recherchez ne semble pas exister",
   error404cta: "Retourner à l'accueil",
+  navigation: "Navigation",
+  languages: "Langues",
+  underConstruction: "En construction",
 };
 
-const zh = {
+const zh: DefaultLanguageResource = {
   login: "登录",
   loginPage: "登录页面",
   logout: "登出",
@@ -79,6 +85,9 @@ const zh = {
   error404: "找不到网页",
   error404message: "您要找的页面似乎不存在",
   error404cta: "返回主页",
+  navigation: "列表",
+  languages: "语言",
+  underConstruction: "正在施工",
 };
 
 const resources = {
@@ -94,7 +103,8 @@ type TranslatedLanguageName = {
 };
 
 export default function useTranslation() {
-  const { locales, locale } = useRouter();
+  const router = useRouter();
+  const { locales, locale, pathname, asPath, query } = router;
 
   const languages: TranslatedLanguageName = {
     en: "English",
@@ -106,5 +116,9 @@ export default function useTranslation() {
     return resources[locale][key];
   }
 
-  return { t, locales, locale, languages };
+  function updateLocale(locale: string | Resources) {
+    router.push({ pathname, query }, asPath, { locale });
+  }
+
+  return { t, locales, locale, languages, updateLocale };
 }
