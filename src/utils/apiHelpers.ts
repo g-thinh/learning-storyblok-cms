@@ -35,8 +35,10 @@ export async function getTag(tagId: string): Promise<StoryResult<Tag>> {
 export async function getAuthor(
   slug: string
 ): Promise<StoryResult<StoryAuthor>> {
+  const { locale } = Router;
   const response = await Storyblok.getStory(slug, {
     find_by: "uuid",
+    language: locale,
   });
   return response.data.story;
 }

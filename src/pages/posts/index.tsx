@@ -46,7 +46,7 @@ export default function PostPage(
   const { t } = useTranslation();
 
   return (
-    <Container maxW="100%">
+    <Container maxW={{ base: "100%", sm: "5xl", lg: "6xl" }}>
       <Heading as="h2" marginTop="5">
         {t("whatsNew")}
       </Heading>

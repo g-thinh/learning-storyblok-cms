@@ -58,7 +58,7 @@ export default function PostPage(
   const story = useStoryblok(props.story);
 
   return (
-    <Container maxW="100%">
+    <Container maxW={{ base: "100%", sm: "5xl", lg: "6xl" }}>
       <Container maxW="48em">
         <Tags tags={story.content.tags} mb={1} />
         <Heading as="h1" mb={6} textAlign="left">

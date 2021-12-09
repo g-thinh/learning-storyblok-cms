@@ -1,5 +1,6 @@
 import { Box, Button, Container, Heading, Text } from "@chakra-ui/react";
 import useTranslation from "hooks/useTranslation";
+import Link from "components/Link";
 
 export default function NotFound() {
   const { t } = useTranslation();
@@ -21,8 +22,13 @@ export default function NotFound() {
         <Text color={"gray.500"} mb={6}>
           {t("error404message")}
         </Text>
-
-        <Button colorScheme="red">{t("error404cta")}</Button>
+        <Link
+          href="/"
+          _hover={{ textDecoration: "none" }}
+          textDecoration="none"
+        >
+          <Button colorScheme="red">{t("error404cta")}</Button>
+        </Link>
       </Box>
     </Container>
   );

@@ -12,7 +12,7 @@ module.exports = {
     storyblokPreviewSecret: process.env.STORYBLOK_PREVIEW_SECRET,
   },
   i18n: {
-    locales: ["en", "fr"],
+    locales: ["en", "fr", "zh"],
     defaultLocale: "en",
   },
   images: {
