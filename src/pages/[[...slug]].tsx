@@ -1,17 +1,29 @@
 import { Box, Container, Divider } from "@chakra-ui/react";
 import RenderRichText from "components/RenderRichText";
-import { GetStaticPropsContext, InferGetStaticPropsType } from "next";
+import {
+  GetStaticPropsContext,
+  GetStaticPathsContext,
+  InferGetStaticPropsType,
+} from "next";
 import { useStoryblok } from "services/storyblok";
-import { getStory } from "utils/apiHelpers";
+import { getStory, getStoriesPaths } from "utils/apiHelpers";
 import Hero from "components/Hero";
 import isDev from "utils/isDev";
 
 export async function getStaticProps(context: GetStaticPropsContext) {
-  const story = await getStory("home", {
+  const story = await getStory(`home`, {
     version: isDev() ? "draft" : "published",
     language: context.locale,
     cv: Date.now(),
   });
+
+  //because of [[...slug]] its hard to catch 404s i.e. /fr/this-is-not-real
+  if (context.params.slug) {
+    return {
+      props: {},
+      notFound: true,
+    };
+  }
 
   return {
     props: {
@@ -23,9 +35,10 @@ export async function getStaticProps(context: GetStaticPropsContext) {
   };
 }
 
-export async function getStaticPaths() {
+export async function getStaticPaths({ locales }: GetStaticPathsContext) {
+  const paths = await getStoriesPaths({ starts_with: "home" }, locales);
   return {
-    paths: [],
+    paths,
     fallback: "blocking",
   };
 }

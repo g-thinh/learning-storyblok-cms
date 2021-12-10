@@ -39,9 +39,9 @@ export default function Footer() {
         <SimpleGrid columns={{ base: 1, sm: 2, md: 4 }} spacing={8}>
           <Stack align={"flex-start"}>
             <ListHeader>{t("navigation")}</ListHeader>
-            <Link href={"#"}>{t("posts")}</Link>
+            <Link href="/posts">{t("posts")}</Link>
             <Stack direction={"row"} align={"center"} spacing={2}>
-              <Link href={"#"}>{t("about")}</Link>
+              <Link href="/about">{t("about")}</Link>
               <Tag
                 size={"sm"}
                 bg={useColorModeValue("red.300", "red.800")}
