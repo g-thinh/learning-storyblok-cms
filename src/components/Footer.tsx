@@ -39,9 +39,9 @@ export default function Footer() {
         <SimpleGrid columns={{ base: 1, sm: 2, md: 4 }} spacing={8}>
           <Stack align={"flex-start"}>
             <ListHeader>{t("navigation")}</ListHeader>
-            <Link href={"#"}>{t("posts")}</Link>
+            <Link href="/posts">{t("posts")}</Link>
             <Stack direction={"row"} align={"center"} spacing={2}>
-              <Link href={"#"}>{t("about")}</Link>
+              <Link href="/about">{t("about")}</Link>
               <Tag
                 size={"sm"}
                 bg={useColorModeValue("red.300", "red.800")}
@@ -51,6 +51,7 @@ export default function Footer() {
                 {t("underConstruction")}
               </Tag>
             </Stack>
+            <Link href="/contact">{t("contactUs")}</Link>
           </Stack>
           <Stack align={"flex-start"}>
             <ListHeader>{t("languages")}</ListHeader>
@@ -81,7 +82,7 @@ export default function Footer() {
           }}
         >
           <Text fontWeight="medium" fontSize="xl">
-            Simple Hub.
+            Simple Story.
           </Text>
         </Flex>
         <Flex
@@ -97,7 +98,7 @@ export default function Footer() {
           <Text mr={1}>{t("footer")}</Text>
           <Link
             sx={{ display: "inline-flex", alignItems: "center" }}
-            href="https://github.com/g-thinh/simple-hub"
+            href="https://github.com/g-thinh/simple-story"
           >
             Gia Thinh Nguyen <Icon ml={1} as={FiGithub} />
           </Link>

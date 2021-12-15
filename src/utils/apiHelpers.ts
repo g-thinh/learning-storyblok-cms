@@ -70,14 +70,14 @@ export async function getStoriesPaths(params?: LinkParams, locales?: string[]) {
   for (const locale of locales) {
     Object.keys(links).forEach((link_id) => {
       if (!links[link_id].is_startpage && !links[link_id].is_folder) {
-        const slug = links[link_id].name;
-        const splittedSlug = slug.split("/");
+        const slug = links[link_id].real_path;
         const result = {
           params: {
-            slug: splittedSlug,
+            slug: [locale],
             locale,
           },
         };
+
         paths.push(result);
       }
     });

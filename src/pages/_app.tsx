@@ -1,8 +1,11 @@
 import { ChakraProvider, Progress } from "@chakra-ui/react";
 import Layout from "components/Layout";
 import { AuthProvider } from "contexts/AuthContext";
+import emailjs from "emailjs-com";
 import useLoading from "hooks/useLoading";
 import theme from "styles/theme";
+
+emailjs.init(process.env.emailJsUserID);
 
 function MyApp({ Component, pageProps }) {
   const { loading } = useLoading();
