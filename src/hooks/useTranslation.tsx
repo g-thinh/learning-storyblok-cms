@@ -4,16 +4,12 @@ type DefaultLanguageResource = typeof en;
 type LanguageKey = keyof typeof en;
 
 const en = {
-  login: "Login",
-  loginPage: "Login Page",
-  logout: "Logout",
-  profile: "Profile",
   email: "Email address",
   password: "Password",
   createAccount: "Create account",
   requiredField: "This field is required",
   footer: "Made with 💙 by",
-  about: "About Us",
+  about: "About",
   posts: "Posts",
   welcome: "Welcome",
   tryNow: "Try Now",
@@ -40,10 +36,6 @@ const en = {
 };
 
 const fr: DefaultLanguageResource = {
-  login: "Connexion",
-  loginPage: "Page de Connexion",
-  logout: "Déconnexion",
-  profile: "Profil",
   email: "Addresse courriel",
   password: "Mot de passe",
   createAccount: "Créer un compte",
@@ -76,10 +68,6 @@ const fr: DefaultLanguageResource = {
 };
 
 const zh: DefaultLanguageResource = {
-  login: "登录",
-  loginPage: "登录页面",
-  logout: "登出",
-  profile: "帐户",
   email: "电子邮件",
   password: "密码",
   createAccount: "创建账户",

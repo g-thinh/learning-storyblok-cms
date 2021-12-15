@@ -18,53 +18,11 @@ import Link from "./Link";
 import Tags from "./Tags";
 import Time from "./Time";
 
-type AuthorProps = {
-  date: string;
-  authorId: string;
-} & StackProps;
-
-export function BlogAuthor({ date, authorId, ...stackProps }: AuthorProps) {
-  const [author, setAuthor] = useState<StoryResult<StoryAuthor>>(null);
-
-  useEffect(() => {
-    async function getAvatar() {
-      try {
-        const response = await getAuthor(authorId);
-        setAuthor(response);
-      } catch (error) {
-        console.error("Invalid AuthorID, unable to retrieve", error);
-      }
-    }
-    getAvatar();
-  }, [authorId]);
-
-  return (
-    <HStack
-      mt="auto"
-      py={3}
-      spacing="3"
-      display="flex"
-      alignItems="center"
-      {...stackProps}
-    >
-      <Avatar
-        size="md"
-        name={author?.content?.name}
-        src={author?.content?.avatar?.filename}
-      />
-      <VStack spacing={0} fontSize="sm">
-        <Text>{author?.content?.name}</Text>
-        <Time time={date} color="gray.500" />
-      </VStack>
-    </HStack>
-  );
-}
-
-type PostCardProps = {
+type CardPostProps = {
   story: StoryResult<StoryPost>;
 };
 
-export function TopPost({ story }: PostCardProps) {
+export function CardLatestPost({ story }: CardPostProps) {
   return (
     <Box
       marginTop={{ base: "1", sm: "5" }}
@@ -146,7 +104,7 @@ export function TopPost({ story }: PostCardProps) {
   );
 }
 
-export function PostCard({ story }: PostCardProps) {
+export function CardPost({ story }: CardPostProps) {
   return (
     <Flex flexDir="column" height="100%">
       <Box w="100%">

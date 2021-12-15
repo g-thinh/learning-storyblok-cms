@@ -6,7 +6,7 @@ import {
   GridItem,
   Heading,
 } from "@chakra-ui/react";
-import { PostCard, TopPost } from "components/PostCard";
+import { CardPost, CardLatestPost } from "components/CardPost";
 import RenderRichText from "components/RenderRichText";
 import useTranslation from "hooks/useTranslation";
 import { GetStaticPropsContext, InferGetStaticPropsType } from "next";
@@ -50,7 +50,7 @@ export default function PostPage(
       <Heading as="h2" marginTop="5">
         {t("whatsNew")}
       </Heading>
-      <TopPost story={props.stories[0]} />
+      <CardLatestPost story={props.stories[0]} />
       <Heading as="h2" marginTop="5">
         {t("latestArticles")}
       </Heading>
@@ -64,7 +64,7 @@ export default function PostPage(
           if (index > 0) {
             return (
               <GridItem key={story.id}>
-                <PostCard key={story.id} story={story} />
+                <CardPost key={story.id} story={story} />
               </GridItem>
             );
           }
