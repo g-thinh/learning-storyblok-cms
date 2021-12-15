@@ -13,17 +13,14 @@ import {
   IconButton,
   useDisclosure,
 } from "@chakra-ui/react";
-import { useAuth } from "contexts/AuthContext";
 import useTranslation from "hooks/useTranslation";
 import { useRef } from "react";
 import { FiMenu } from "react-icons/fi";
-import { signUserOut } from "utils/firebaseHelpers";
 import LanguagePicker from "./LanguagePicker";
 import Link from "./Link";
 import ThemeToggleButton from "./ThemeToggleButton";
 
 export default function Drawer() {
-  const { user } = useAuth();
   const { t } = useTranslation();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = useRef<HTMLButtonElement | null>();
@@ -57,27 +54,7 @@ export default function Drawer() {
             </Flex>
           </DrawerBody>
           <DrawerFooter>
-            <Grid gap={3} gridAutoFlow="column">
-              <ThemeToggleButton aria-label="toggle dark/light mode" />
-              {user ? (
-                <>
-                  <Link as={Button} href="/profile">
-                    {t("profile")}
-                  </Link>
-                  <Button colorScheme="red" onClick={signUserOut}>
-                    {t("logout")}
-                  </Button>
-                </>
-              ) : (
-                <Link
-                  colorScheme="teal"
-                  href="/login"
-                  sx={{ ":hover": { textDecoration: "none" } }}
-                >
-                  <Button colorScheme="teal">{t("login")}</Button>
-                </Link>
-              )}
-            </Grid>
+            <ThemeToggleButton aria-label="toggle dark/light mode" />
           </DrawerFooter>
         </DrawerContent>
       </ChakraDrawer>

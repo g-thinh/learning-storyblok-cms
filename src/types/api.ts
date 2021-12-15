@@ -1,15 +1,5 @@
 import { StoryData, StoryblokComponent, Richtext } from "storyblok-js-client";
 
-export interface Session {
-  success?: boolean;
-  message?: string;
-}
-
-export type UserForm = {
-  email: string;
-  password: string;
-};
-
 export type StoryResult<T> = StoryData<StoryblokComponent<string> & T>;
 
 export type StoryPost = {
