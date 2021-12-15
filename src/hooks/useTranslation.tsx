@@ -30,6 +30,13 @@ const en = {
   navigation: "Navigation",
   languages: "Languages",
   underConstruction: "Under construction",
+  contactUs: "Contact Us",
+  askUs: "If you have any questions, please feel free to ask us.",
+  yourName: "Your Name",
+  yourEmail: "Email Address",
+  message: "Message",
+  submit: "Submit",
+  contactFormPlaceholder: "type your message here",
 };
 
 const fr: DefaultLanguageResource = {
@@ -59,6 +66,13 @@ const fr: DefaultLanguageResource = {
   navigation: "Navigation",
   languages: "Langues",
   underConstruction: "En construction",
+  contactUs: "Nous contacter",
+  askUs: "Si vous avez des questions, n'hésitez pas à nous les poser.",
+  yourName: "Votre Nom",
+  yourEmail: "Votre Courriel",
+  message: "Message",
+  submit: "Soumettre",
+  contactFormPlaceholder: "tapez votre message ici",
 };
 
 const zh: DefaultLanguageResource = {
@@ -88,6 +102,13 @@ const zh: DefaultLanguageResource = {
   navigation: "列表",
   languages: "语言",
   underConstruction: "正在施工",
+  contactUs: "联系我们",
+  askUs: "如果您有任何问题，请随时向我们提问。",
+  yourName: "名称",
+  yourEmail: "电子邮件",
+  message: "信息",
+  submit: "提交",
+  contactFormPlaceholder: "在这里输入你的消息",
 };
 
 const resources = {

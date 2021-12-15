@@ -10,6 +10,7 @@ module.exports = {
     clientEmail: process.env.NEXT_PUBLIC_FIREBASE_CLIENT_EMAIL,
     storyblokAcessToken: process.env.NEXT_PUBLIC_STORYBLOK_ACCESS_TOKEN,
     storyblokPreviewSecret: process.env.STORYBLOK_PREVIEW_SECRET,
+    emailJsUserID: process.env.EMAILJS_USER_ID,
   },
   i18n: {
     locales: ["en", "fr", "zh"],
