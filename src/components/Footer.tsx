@@ -51,6 +51,7 @@ export default function Footer() {
                 {t("underConstruction")}
               </Tag>
             </Stack>
+            <Link href="/contact">{t("contactUs")}</Link>
           </Stack>
           <Stack align={"flex-start"}>
             <ListHeader>{t("languages")}</ListHeader>
@@ -81,7 +82,7 @@ export default function Footer() {
           }}
         >
           <Text fontWeight="medium" fontSize="xl">
-            Simple Hub.
+            Simple Story.
           </Text>
         </Flex>
         <Flex
@@ -97,7 +98,7 @@ export default function Footer() {
           <Text mr={1}>{t("footer")}</Text>
           <Link
             sx={{ display: "inline-flex", alignItems: "center" }}
-            href="https://github.com/g-thinh/simple-hub"
+            href="https://github.com/g-thinh/simple-story"
           >
             Gia Thinh Nguyen <Icon ml={1} as={FiGithub} />
           </Link>

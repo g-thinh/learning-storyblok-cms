@@ -28,7 +28,7 @@ export default function Nav() {
               },
             }}
           >
-            Simple Hub.
+            Simple Story.
           </Link>
           <Grid
             fontSize="lg"
@@ -44,6 +44,7 @@ export default function Nav() {
           >
             <Link href="/posts">{t("posts")}</Link>
             <Link href="/about">{t("about")}</Link>
+            <Link href="/contact">{t("contactUs")}</Link>
           </Grid>
         </Flex>
         <Grid
