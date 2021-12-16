@@ -11,13 +11,20 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import useTranslation from "hooks/useTranslation";
+import { Hero } from "types/api";
 import Image from "./Image";
 import Link from "./Link";
 
-export default function CallToActionWithVideo() {
+type HeroProps = {
+  title?: Hero["hero_title"];
+  description?: Hero["hero_description"];
+  image?: Hero["hero_image"];
+};
+
+export function Hero({ title, description, image }: HeroProps) {
   const { t } = useTranslation();
   return (
-    <Container maxW={{ base: "4xl", md: "5xl", lg: "6xl" }}>
+    <Container as="section" maxW={{ base: "4xl", md: "5xl", lg: "6xl" }}>
       <Stack
         align={"center"}
         spacing={{ base: 8, md: 10 }}
@@ -30,29 +37,10 @@ export default function CallToActionWithVideo() {
             fontWeight={600}
             fontSize={{ base: "4xl", sm: "5xl", lg: "6xl" }}
           >
-            <Text
-              as={"span"}
-              position={"relative"}
-              _after={{
-                content: "''",
-                width: "full",
-                height: "30%",
-                position: "absolute",
-                bottom: 1,
-                left: 0,
-                bg: "teal.400",
-                zIndex: -1,
-              }}
-            >
-              {t("cta1")}
-            </Text>
-            <br />
-            <Text as={"span"} color={"teal.400"}>
-              {t("cta2")}
-            </Text>
+            {title}
           </Heading>
           <Text fontSize="xl" color={"gray.500"}>
-            {t("cta3")}
+            {description}
           </Text>
           <Stack
             spacing={{ base: 4, sm: 6 }}
@@ -114,13 +102,7 @@ export default function CallToActionWithVideo() {
             width={"full"}
             overflow={"hidden"}
           >
-            <Image
-              alt={"Hero Image"}
-              ratio={16 / 9}
-              src={
-                "https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=800&q=80"
-              }
-            />
+            <Image ratio={16 / 9} src={image.filename} alt={image.alt} />
           </Box>
         </Flex>
       </Stack>

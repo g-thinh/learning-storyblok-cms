@@ -1,22 +1,10 @@
-import {
-  Avatar,
-  Box,
-  Flex,
-  Heading,
-  HStack,
-  StackProps,
-  Text,
-  useColorModeValue,
-  VStack,
-} from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
-import { StoryAuthor, StoryPost, StoryResult } from "types/api";
-import { getAuthor } from "utils/apiHelpers";
-import Image from "./Image";
+import { Box, Flex, Heading, Text, useColorModeValue } from "@chakra-ui/react";
+import React from "react";
+import { StoryPost, StoryResult } from "types/api";
 import Author from "./Author";
+import Image from "./Image";
 import Link from "./Link";
 import Tags from "./Tags";
-import Time from "./Time";
 
 type CardPostProps = {
   story: StoryResult<StoryPost>;
@@ -140,11 +128,6 @@ export function CardPost({ story }: CardPostProps) {
           </Text>
           <Tags tags={story.content.tags} marginTop="3" />
         </Flex>
-
-        <Author
-          authorId={story.content.author}
-          date={story.first_published_at}
-        />
       </Flex>
     </Flex>
   );

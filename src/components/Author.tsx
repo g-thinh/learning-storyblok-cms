@@ -1,26 +1,30 @@
 import {
   Avatar,
+  AvatarProps,
   HStack,
   Stack,
   StackProps,
   Text,
-  VStack,
 } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { StoryAuthor, StoryResult } from "types/api";
 import { getAuthor } from "utils/apiHelpers";
 import Time from "./Time";
-import { useRouter } from "next/router";
 
 type AuthorProps = {
-  date: string;
+  date?: string;
+  showRole?: boolean;
   authorId: string;
+  avatarSize?: AvatarProps["size"];
 } & StackProps;
 
 export default function Author({
   date,
   authorId,
   direction,
+  avatarSize = "md",
+  showRole = false,
   ...stackProps
 }: AuthorProps) {
   const [author, setAuthor] = useState<StoryResult<StoryAuthor>>(null);
@@ -48,18 +52,23 @@ export default function Author({
       {...stackProps}
     >
       <Avatar
-        size="md"
+        size={avatarSize}
         name={author?.content?.name}
         src={author?.content?.avatar?.filename}
       />
       <Stack
-        spacing={direction ? 3 : 0}
+        spacing={direction ? 2 : 0}
         fontSize="sm"
         alignItems="start"
         direction={direction ?? "column"}
       >
         <Text>{author?.content?.name}</Text>
-        <Time time={date} color="gray.500" />
+        {showRole && (
+          <Text fontStyle="italic" color="gray.600">
+            {author?.content?.role}
+          </Text>
+        )}
+        {date && <Time time={date} color="gray.500" />}
       </Stack>
     </HStack>
   );

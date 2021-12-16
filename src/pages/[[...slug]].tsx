@@ -1,17 +1,18 @@
-import { Box, Container, Divider } from "@chakra-ui/react";
-import RenderRichText from "components/RenderRichText";
+import { Container } from "@chakra-ui/react";
+import CardQuote from "components/CardQuote";
+import Features from "components/Features";
+import { Hero } from "components/Hero";
 import {
-  GetStaticPropsContext,
   GetStaticPathsContext,
+  GetStaticPropsContext,
   InferGetStaticPropsType,
 } from "next";
 import { useStoryblok } from "services/storyblok";
-import { getStory, getStoriesPaths } from "utils/apiHelpers";
-import Hero from "components/Hero";
+import { getHomepage, getStoriesPaths } from "utils/apiHelpers";
 import isDev from "utils/isDev";
 
 export async function getStaticProps(context: GetStaticPropsContext) {
-  const story = await getStory(`home`, {
+  const story = await getHomepage({
     version: isDev() ? "draft" : "published",
     language: context.locale,
     cv: Date.now(),
@@ -49,22 +50,18 @@ export default function HomePage(
   const story = useStoryblok(props.story);
 
   return (
-    <Container maxW={{ base: "100%", sm: "5xl", lg: "6xl" }}>
-      <Hero />
-      <Divider
-        bgGradient="linear(to-r, teal.200,teal.300, teal.600)"
-        borderRadius="sm"
-        height={1}
-        width="100%"
-        my={8}
+    <Container p={0} maxW={{ base: "100%" }}>
+      <Hero
+        title={story.content.hero_title}
+        description={story.content.hero_description}
+        image={story.content.hero_image}
       />
-      <Box
-        mx="auto"
-        p={3}
-        maxW={{ base: "100rem", md: "3xl", lg: "5xl", xl: "6xl" }}
-      >
-        {RenderRichText(story.content.body)}
-      </Box>
+      <Features
+        features={story.content.features}
+        name={story.content.features_headline}
+        description={story.content.features_description}
+      />
+      <CardQuote authorId={story.content.author} text={story.content.quote} />
     </Container>
   );
 }

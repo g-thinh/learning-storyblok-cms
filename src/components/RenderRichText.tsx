@@ -1,4 +1,5 @@
 import { Box, Heading, ListItem, Text, UnorderedList } from "@chakra-ui/react";
+import Link from "./Link";
 import {
   render,
   RenderOptionsProps,
@@ -36,7 +37,15 @@ export const StoryblokResolvers: RenderOptionsProps = {
       />
     ),
   },
-  markResolvers: {},
+  markResolvers: {
+    link: (children, attrs) => {
+      return (
+        <Link color="teal.400" {...attrs}>
+          {children}
+        </Link>
+      );
+    },
+  },
   defaultBlokResolver: (name) => (
     <Text color="red" fontWeight="bold">
       No blok resolver found for {name}

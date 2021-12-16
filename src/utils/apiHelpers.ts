@@ -9,10 +9,18 @@ import {
   StoryPost,
   StoryAuthor,
   StoryblokLinks,
+  StoryHome,
   LinkParams,
   Tag,
 } from "types/api";
 import Router from "next/router";
+
+export async function getHomepage(
+  params?: StoryParams
+): Promise<StoryResult<StoryHome>> {
+  const response = await Storyblok.getStory("home", params);
+  return response.data.story;
+}
 
 export async function getStory(
   slug: string,
